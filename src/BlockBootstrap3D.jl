@@ -17,11 +17,35 @@ function blockbootstrap_1D(numobs::Int,blocklength::Int ) where F<:Int
     return inds
 end
 
+"""
+   blockbootstrap_2D_circ(datsize::Tuple{F,F},blocklengths::Tuple{F,F}) where F<:Int   
+
+Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data
+In the circular bootstrap, the array wraps around itself in both dimensions, meaning there is no "cutoff" at 
+the border and all samples are equally as likely to be drawn
+On the other hand, blocks drawn at borders are artificial and do not retain their dependency structure
+
+# Examples
+
+```jldoctest 
+julia> using BlockBootstrap3D
+julia> datsize = (9,9);
+julia> blocklengths_xy = (3,3);
+julia> blockbootstrap_2D_circ(datsize,blocklengths_xy)
+9×9 Array{CartesianIndex{2},2}:
+ CartesianIndex(5, 4)  CartesianIndex(5, 5)  CartesianIndex(5, 6)  CartesianIndex(7, 7)  CartesianIndex(7, 8)  CartesianIndex(7, 9)  CartesianIndex(7, 5)  CartesianIndex(7, 6)  CartesianIndex(7, 7)
+ CartesianIndex(6, 4)  CartesianIndex(6, 5)  CartesianIndex(6, 6)  CartesianIndex(8, 7)  CartesianIndex(8, 8)  CartesianIndex(8, 9)  CartesianIndex(8, 5)  CartesianIndex(8, 6)  CartesianIndex(8, 7)
+ CartesianIndex(7, 4)  CartesianIndex(7, 5)  CartesianIndex(7, 6)  CartesianIndex(9, 7)  CartesianIndex(9, 8)  CartesianIndex(9, 9)  CartesianIndex(9, 5)  CartesianIndex(9, 6)  CartesianIndex(9, 7)
+ CartesianIndex(4, 6)  CartesianIndex(4, 7)  CartesianIndex(4, 8)  CartesianIndex(6, 5)  CartesianIndex(6, 6)  CartesianIndex(6, 7)  CartesianIndex(9, 2)  CartesianIndex(9, 3)  CartesianIndex(9, 4)
+ CartesianIndex(5, 6)  CartesianIndex(5, 7)  CartesianIndex(5, 8)  CartesianIndex(7, 5)  CartesianIndex(7, 6)  CartesianIndex(7, 7)  CartesianIndex(1, 2)  CartesianIndex(1, 3)  CartesianIndex(1, 4)
+ CartesianIndex(6, 6)  CartesianIndex(6, 7)  CartesianIndex(6, 8)  CartesianIndex(8, 5)  CartesianIndex(8, 6)  CartesianIndex(8, 7)  CartesianIndex(2, 2)  CartesianIndex(2, 3)  CartesianIndex(2, 4)
+ CartesianIndex(5, 2)  CartesianIndex(5, 3)  CartesianIndex(5, 4)  CartesianIndex(1, 9)  CartesianIndex(1, 1)  CartesianIndex(1, 2)  CartesianIndex(6, 1)  CartesianIndex(6, 2)  CartesianIndex(6, 3)
+ CartesianIndex(6, 2)  CartesianIndex(6, 3)  CartesianIndex(6, 4)  CartesianIndex(2, 9)  CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(7, 1)  CartesianIndex(7, 2)  CartesianIndex(7, 3)
+ CartesianIndex(7, 2)  CartesianIndex(7, 3)  CartesianIndex(7, 4)  CartesianIndex(3, 9)  CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(8, 1)  CartesianIndex(8, 2)  CartesianIndex(8, 3)
+```
+
+"""
 function blockbootstrap_2D_circ(datsize::Tuple{F,F},blocklengths::Tuple{F,F}) where F<:Int
-    # Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data
-    # In the circular bootstrap, the array wraps around itself in both dimensions, meaning there is no "cutoff" at 
-    # the border and all samples are equally as likely to be drawn
-    # On the other hand, blocks drawn at borders are then artifical and do not retain their dependency structure
 
     numobs1,numobs2 = datsize
     bl1,bl2 = blocklengths
