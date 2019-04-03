@@ -34,9 +34,7 @@ https://www.authorea.com/users/95958/articles/361741-confidence-intervals-for-fo
 
 This is loosely based on Seasonal Block Bootstrap by Chan et al (2004), where the seasonal trend in an annual time series was preserved by building temporally sequential blocks of length b << p, where p is the annual period, and the blocks are randomly sampled with replacement from different years. 
 
-Here is an exapmle of a 3D variant, based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years, but from other locations. 
-
-For now, here is example code:
+For now, Here is an example of a 3D variant, based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years, but from other locations. 
 ```
 function myblockbootstrap_time(y,blocklengths_xy,blocklength_time)
    # Take an 3D array y = y(time,longitude,latitude) and do a 3D seasonal block bootstrap,
