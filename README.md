@@ -4,9 +4,9 @@ Block bootstrap in 3 dimensions suitable e.g. for gridded meteorological data wi
 
    blockbootstrap_2D_circ(datsize::Tuple{F,F},blocklengths::Tuple{F,F}) where F<:Int   
 
-Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data
+Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data.
 In the circular bootstrap, the array wraps around itself in both dimensions, meaning there is no "cutoff" at 
-the border and all samples are equally as likely to be drawn
+the border and all samples are equally as likely to be drawn.
 On the other hand, blocks drawn at borders are artificial and do not retain their dependency structure
 
 # Examples
