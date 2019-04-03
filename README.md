@@ -38,38 +38,30 @@ Here is an exapmle of a 3D variant, based on reconstructing the annual cycle by 
 
 For now, here is example code:
 ```
-function myblockbootstrap_time(y_true,y_pred1,y_pred2,blocklengths_xy,bl_time)
-    nt,nx,ny = size(y_true)
+function myblockbootstrap_time(y,blocklengths_xy,blocklength_time)
+   # Take an 3D array y = y(time,longitude,latitude) and do a 3D seasonal block bootstrap,
+   # where the temporal non-stationarity is retained
+    nt,nx,ny = size(y)
     size_xy = (nx,ny)
-    nb_t = floor(Int,nt/bl_time)
+    nb_t = floor(Int,nt/blocklength_time)
 
+    # The first temporal block is done outside of loop
     ind_start = 1;
     ind_end = bl_time;
+    # Spatial block bootstrap
     inds_xy_bb = blockbootstrap_2D_circ(size_xy,blocklengths_xy);
 
-    y_true_bb = y_true[ind_start:ind_end,inds_xy_bb];
-    y_pred1_bb = y_pred1[ind_start:ind_end,inds_xy_bb];
-    y_pred2_bb = y_pred2[ind_start:ind_end,inds_xy_bb];
+    y_blockboot = y[ind_start:ind_end,inds_xy_bb];
 
+    # Loop over periods nb_t, building blocks sequentially but bootstrapping in spatial dimensions
     for i = 2:nb_t
         ind_start = 1 + (i-1)*bl_time;
         ind_end = i*bl_time;
         inds_xy_bb = blockbootstrap_2D_circ(size_xy,blocklengths_xy);
         
-        y_true_bb = cat(y_true_bb,y_true[ind_start:ind_end,inds_xy_bb],dims=1);
-        y_pred1_bb = cat(y_pred1_bb,y_pred1[ind_start:ind_end,inds_xy_bb],dims=1);
-        y_pred2_bb = cat(y_pred2_bb,y_pred2[ind_start:ind_end,inds_xy_bb],dims=1);
+        y_blockboot = cat(y_blockboot,y_blockboot[ind_start:ind_end,inds_xy_bb],dims=1);
     end
 
-    y_tmp = copy(y_pred1_bb);
-    y_true_bb = vcat(y_true_bb...);
-    y_pred1_bb = vcat(y_pred1_bb...);
-    y_pred2_bb = vcat(y_pred2_bb...);
-
-    auc_pr1 = auc_PR(y_true_bb,y_pred1_bb);
-    auc_pr2 = auc_PR(y_true_bb,y_pred2_bb);
-    auc_roc1 = auc_ROC(y_true_bb,y_pred1_bb);
-    auc_roc2 = auc_ROC(y_true_bb,y_pred2_bb);
-    return auc_pr1,auc_pr2,auc_roc1,auc_roc2,y_tmp,inds_xy_bb
+    return y_blockboot
 end
 ```
