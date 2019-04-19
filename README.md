@@ -40,7 +40,7 @@ The method is loosely based on Seasonal Block Bootstrap by Chan et al. (2004), w
 
 This novel variant of the Seasonal Block Boostrap is based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years as in Chan et al. (2004), but from other locations. 
 ```
-function myblockbootstrap_time(y,blocklengths_xy,blocklength_time)
+function 3D_blockbootstrap(y,blocklengths_xy,blocklength_time)
    # Take an 3D array y = y(time,longitude,latitude) and do a 3D seasonal block bootstrap,
    # where the temporal non-stationarity is retained
     nt,nx,ny = size(y)
