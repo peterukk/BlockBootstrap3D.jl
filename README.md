@@ -1,6 +1,6 @@
 # BlockBootstrap3D.jl
 
-Block bootstrap in 3 dimensions suitable e.g. for gridded meteorological data with both spatial and temporal correlation. 
+Block bootstrap in 3 dimensions suitable for gridded meteorological data exhibiting both spatial and temporal correlation. 
 The 3D bootstrap is an extension of a 2D bootstrap for spatial data:
 ```
    blockbootstrap_2D_circ(datsize::Tuple{F,F},blocklengths::Tuple{F,F}) where F<:Int   
