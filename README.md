@@ -5,7 +5,8 @@ The 3D bootstrap is an extension of a 2D bootstrap for spatial data:
 ```
    blockbootstrap_2D_circ(datsize::Tuple{F,F},blocklengths::Tuple{F,F}) where F<:Int   
 
-Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data. The block boostrap samples data in blocks instead of single samples, respecting the correlation structure. 
+Function for the moving block bootstrap in two dimensions, returning the bootstrapped indices for your data. 
+The block boostrap samples data in blocks instead of single samples, respecting the correlation structure. 
 In the circular bootstrap, the array wraps around itself in both dimensions, meaning there is no "cutoff" at 
 the border and all samples are equally as likely to be drawn.
 On the other hand, blocks which are drawn at borders are artificial and do not retain their dependency structure.
