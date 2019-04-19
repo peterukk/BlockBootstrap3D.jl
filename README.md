@@ -12,7 +12,7 @@ the border and all samples are equally as likely to be drawn.
 On the other hand, blocks which are drawn at borders are artificial and do not retain their dependency structure.
 ```
 
-# Examples
+# Example
 
 ```
 julia> using BlockBootstrap3D
@@ -30,6 +30,7 @@ julia> blockbootstrap_2D_circ(datsize,blocklengths_xy)
  CartesianIndex(6, 2)  CartesianIndex(6, 3)  CartesianIndex(6, 4)  CartesianIndex(2, 9)  CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(7, 1)  CartesianIndex(7, 2)  CartesianIndex(7, 3)
  CartesianIndex(7, 2)  CartesianIndex(7, 3)  CartesianIndex(7, 4)  CartesianIndex(3, 9)  CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(8, 1)  CartesianIndex(8, 2)  CartesianIndex(8, 3)
 ```
+# 3D block bootstrap
 
 A 3D block bootstrap method for spatiotemporal data is implemented. This method respects the trend/periodicity in the temporal dimension and is described and applied in the context of generating confidence intervals for verification measures of thunderstorm forecast models at:
 
