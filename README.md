@@ -36,9 +36,9 @@ A 3D block bootstrap method for spatiotemporal data is implemented. This method 
 
 https://www.authorea.com/users/95958/articles/361741-confidence-intervals-for-forecast-verification-measures-in-meteorology-using-a-three-dimensional-block-bootstrap
 
-The method is loosely based on Seasonal Block Bootstrap by Chan et al (2004), where the seasonal trend in an annual time series was preserved by building temporally sequential blocks of length b << p, where p is the annual period, and the blocks are randomly sampled with replacement from different years. 
+The method is loosely based on Seasonal Block Bootstrap by Chan et al. (2004), where the seasonal trend in an annual time series was preserved by building temporally sequential blocks of length b << p, where p is the annual period, and the blocks are randomly sampled with replacement from different years. 
 
-This novel variant of the Seasonal Block Boostrap is based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years, but from other locations. 
+This novel variant of the Seasonal Block Boostrap is based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years as in Chan et al. (2004), but from other locations. 
 ```
 function myblockbootstrap_time(y,blocklengths_xy,blocklength_time)
    # Take an 3D array y = y(time,longitude,latitude) and do a 3D seasonal block bootstrap,
@@ -67,3 +67,6 @@ function myblockbootstrap_time(y,blocklengths_xy,blocklength_time)
     return y_blockboot
 end
 ```
+REFERENCES:
+
+Victor Chan, Soumendra N Lahiri, William Q Meeker. Block Bootstrap Estimation of the Distribution of Cumulative Outdoor Degradation. Technometrics 46, 215–224 Informa UK Limited, 2004
