@@ -38,19 +38,19 @@ https://www.authorea.com/users/95958/articles/361741-confidence-intervals-for-fo
 
 The method is loosely based on Seasonal Block Bootstrap by Chan et al. (2004), where the seasonal trend in an annual time series was preserved by building temporally sequential blocks of length b << p, where p is the annual period, and the blocks are randomly sampled with replacement from different years. 
 
-This novel variant of the Seasonal Block Boostrap is based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years as in Chan et al. (2004), but from other locations. 
+This variant of the Seasonal Block Boostrap is based on reconstructing the annual cycle by using spatially bootstrapped blocks which are sampled and placed sequentially in time in blocks which span integer multiples of the diurnal period. Therefore, the temporally ordered blocks are not sampled from other years as in Chan et al. (2004), but from other locations. 
 ```
 function 3D_blockbootstrap(y,blocklengths_xy,blocklength_time)
    # Take an 3D array y = y(time,longitude,latitude) and do a 3D seasonal block bootstrap,
    # where the temporal non-stationarity is retained
     nt,nx,ny = size(y)
     size_xy = (nx,ny)
-    nb_t = floor(Int,nt/blocklength_time)
+    nb_t = floor(Int,nt/blocklength_time) # Number of blocks in temporal dimension
 
     # The first temporal block is done outside of loop
     ind_start = 1;
     ind_end = bl_time;
-    # Spatial block bootstrap
+    # 2D spatial block bootstrap
     inds_xy_bb = blockbootstrap_2D_circ(size_xy,blocklengths_xy);
 
     y_blockboot = y[ind_start:ind_end,inds_xy_bb];
